@@ -33,6 +33,7 @@ export interface Meta {
 }
 
 const BASE_PATH = 'https://alanbase-front-bt2of.ondigitalocean.app'
+export const USERS_BASE_LIMIT = 50;
 
 export const getUsers = async (params: RequestUsers): Promise<ResponseUsers> => {
     const response = await axios<ResponseUsers>({
@@ -60,7 +61,7 @@ export const getGetUsersInfiniteQueryOptions = (params: RequestUsers): UseInfini
         queryKey,
         queryFn,
         getNextPageParam: (data) => {
-            if (data?.meta?.from - (data?.currentPage + 1) < 0) {
+            if (data?.meta?.total - (data?.currentPage + 1) < 0) {
                 return undefined;
             }
             return data.currentPage + 1;
