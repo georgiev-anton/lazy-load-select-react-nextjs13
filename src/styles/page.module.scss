@@ -56,10 +56,9 @@
 
 .SelectList {
   opacity: 1;
-  display: block; /* начальное состояние, оно может быть display: none; или display: block; в зависимости от ваших потребностей */
+  display: block;
   transition: opacity 0.35s;
   height: 160px;
-  //overflow: scroll;
 
   border-collapse: collapse;
   margin: 0;
@@ -108,7 +107,7 @@
 
 .ItemTitle {
   width: 350px;
-  height: 32px;
+  height: 19px;
   font-weight: 400 !important;
 
   margin: 0 0 0 10px;

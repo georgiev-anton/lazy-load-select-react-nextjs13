@@ -1,6 +1,6 @@
 import "../styles/global.scss";
 import type { Metadata } from 'next'
-import Providers from "@/app/components/Providers/Providers";
+import {Providers} from "@/app/components/Providers";
 
 export const metadata: Metadata = {
   title: 'Create Next App',
