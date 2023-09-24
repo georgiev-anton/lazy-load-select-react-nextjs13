@@ -1,0 +1,115 @@
+@import "./colors";
+
+.MainContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+
+.Wrapper {
+  position: absolute;
+  top: 30%;
+  right: 50%
+}
+
+.Title {
+  margin-bottom: 5px;
+}
+
+.SelectContainer {
+  width: 361px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  position: relative;
+
+  background: $select-background;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &::after {
+    color: red;
+    content: url('/public/assets/icn_16_small_arrow_bottom.svg');
+    position: absolute;
+    top: 9px;
+    left: 335px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  &:focus {
+    border: 1px solid $border-color;
+
+    &::after {
+      top: 8px;
+      left: 334px;
+    }
+  }
+}
+
+.SelectContainer:focus + .SelectList {
+   opacity: 1;
+}
+
+.SelectList {
+  opacity: 1;
+  display: block; /* начальное состояние, оно может быть display: none; или display: block; в зависимости от ваших потребностей */
+  transition: opacity 0.35s;
+  height: 160px;
+  //overflow: scroll;
+
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+
+  background: $select-background;
+
+  border-radius: 4px;
+}
+
+.ListItem {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+  &:hover {
+    background: rgba(228, 234, 255, 1);
+  }
+}
+
+.ActiveListItem {
+  border: 2px solid rgba(73, 113, 255, 1);
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+}
+
+.ItemIcon {
+  background: $icon-background;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  font-weight: 500 !important;
+
+  font-size: 10px;
+
+}
+
+.ItemTitle {
+  width: 350px;
+  height: 32px;
+  font-weight: 400 !important;
+
+  margin: 0 0 0 10px;
+}
