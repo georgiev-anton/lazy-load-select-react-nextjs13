@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import S from "@/styles/page.module.scss";
 import InfiniteLoader from "react-window-infinite-loader";
 import AutoSizer from "react-virtualized-auto-sizer";
-import {FixedSizeList as List} from "react-window";
+import {VariableSizeList as List} from "react-window";
 import {useGetUsersInfinite, User, USERS_BASE_LIMIT} from "@/api/users";
 import {UserItem} from "@/app/components/Item";
 import {Loader} from "@/app/components/Loader";
@@ -44,44 +44,53 @@ export const UserSelector = () => {
     }
 
     return (
-            <div className={S.Wrapper}>
-                <p className={S.Title}>Users</p>
-                <div className={S.SelectContainer}/>
-                <ul className={S.SelectList}>
-                    <InfiniteLoader
-                        itemCount={usersTotal}
-                        isItemLoaded={isItemLoaded}
-                        loadMoreItems={loadMoreItems as any}>
-                        {({onItemsRendered, ref}) => (
-                            <AutoSizer>
-                                {({height, width}) => (
-                                    <List
-                                        itemData={userList}
-                                        ref={ref}
-                                        onItemsRendered={onItemsRendered}
-                                        height={height}
-                                        itemCount={usersTotal}
-                                        itemSize={32}
-                                        width={width}>
-                                        {({data, index, style}) => {
-                                            const user = data?.[index];
-                                            if (!user) {
-                                                return <Loader style={style}/>
+        <div className={S.Wrapper}>
+            <p className={S.Title}>Users</p>
+            <div className={S.SelectContainer}/>
+            <ul className={S.SelectList}>
+                <InfiniteLoader
+                    itemCount={usersTotal}
+                    isItemLoaded={isItemLoaded}
+                    loadMoreItems={loadMoreItems as any}>
+                    {({onItemsRendered, ref}) => (
+                        <AutoSizer>
+                            {({height, width}) => (
+                                <List
+                                    itemData={userList}
+                                    ref={ref}
+                                    onItemsRendered={onItemsRendered}
+                                    height={height}
+                                    itemCount={usersTotal}
+                                    itemSize={(index) => {
+                                        const user = userList?.[index];
+                                        if (user) {
+                                            const text = `${user.last_name} ${user.first_name}, ${user.job}`;
+                                            if (text.length > 42) {
+                                                return 44;
                                             }
-                                            return (
-                                                <UserItem
-                                                    style={style}
-                                                    user={user}
-                                                    selectedUser={checkItem}
-                                                    setSelectedUser={setCheckItem}/>
-                                            );
-                                        }}
-                                    </List>
-                                )}
-                            </AutoSizer>
-                        )}
-                    </InfiniteLoader>
-                </ul>
-            </div>
+                                        }
+                                        return 32;
+                                    }}
+                                    width={width}>
+                                    {({data, index, style}) => {
+                                        const user = data?.[index];
+                                        if (!user) {
+                                            return <Loader style={style}/>
+                                        }
+                                        return (
+                                            <UserItem
+                                                style={style}
+                                                user={user}
+                                                selectedUser={checkItem}
+                                                setSelectedUser={setCheckItem}/>
+                                        );
+                                    }}
+                                </List>
+                            )}
+                        </AutoSizer>
+                    )}
+                </InfiniteLoader>
+            </ul>
+        </div>
     )
 }

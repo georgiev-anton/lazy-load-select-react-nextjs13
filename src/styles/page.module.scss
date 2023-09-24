@@ -20,7 +20,7 @@
 }
 
 .SelectContainer {
-  width: 361px;
+  width: 357px;
   height: 32px;
   border: none;
   border-radius: 4px;
@@ -70,7 +70,7 @@
 }
 
 .ListItem {
-  height: 32px;
+  height: 100%;
   padding: 0 12px;
   margin: 1px 0;
   display: flex;
@@ -103,8 +103,8 @@
 }
 
 .ItemTitle {
-  width: 350px;
-  height: 19px;
+  width: 309px;
+  //height: 19px;
   font-weight: 400 !important;
 
   margin: 0 0 0 10px;
