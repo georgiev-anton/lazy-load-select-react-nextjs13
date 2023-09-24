@@ -8,10 +8,11 @@ type LoaderProps = {
 export const Loader: FC<LoaderProps> = ({style}) => {
     return (
         <ol
-            style={style}
-            className={S.ListItem}
+            style={{...style, paddingLeft: 0}}
         >
-            <p className={S.ItemTitle}>Loading...</p>
+            <div className={S.ListItem}>
+                <p className={S.ItemTitle}>Loading...</p>
+            </div>
         </ol>
     );
 }

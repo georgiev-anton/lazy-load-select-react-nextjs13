@@ -70,7 +70,9 @@
 }
 
 .ListItem {
-  padding: 8px 12px;
+  height: 32px;
+  padding: 0 12px;
+  margin: 1px 0;
   display: flex;
   align-items: center;
 
@@ -81,10 +83,7 @@
 }
 
 .ActiveListItem {
-  border: 2px solid rgba(73, 113, 255, 1);
-  box-sizing: border-box;
-  width: 100%;
-  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(73, 113, 255, 1);
 }
 
 .ItemIcon {
@@ -100,9 +99,7 @@
   justify-content: center;
   line-height: 20px;
   font-weight: 500 !important;
-
   font-size: 10px;
-
 }
 
 .ItemTitle {

@@ -44,7 +44,6 @@ export const UserSelector = () => {
     }
 
     return (
-        <main className={S.MainContainer}>
             <div className={S.Wrapper}>
                 <p className={S.Title}>Users</p>
                 <div className={S.SelectContainer}/>
@@ -62,7 +61,7 @@ export const UserSelector = () => {
                                         onItemsRendered={onItemsRendered}
                                         height={height}
                                         itemCount={usersTotal}
-                                        itemSize={30}
+                                        itemSize={32}
                                         width={width}>
                                         {({data, index, style}) => {
                                             const user = data?.[index];
@@ -84,6 +83,5 @@ export const UserSelector = () => {
                     </InfiniteLoader>
                 </ul>
             </div>
-        </main>
     )
 }

@@ -2,6 +2,7 @@ import React from "react";
 import {prefetchGetUsersInfinite, USERS_BASE_LIMIT} from "@/api/users";
 import {dehydrate, Hydrate, QueryClient} from "@tanstack/react-query";
 import {UserSelector} from "@/app/components/UserSelector";
+import S from "@/styles/page.module.scss";
 
 export default async function Hydation() {
     const queryClient = new QueryClient();
@@ -12,7 +13,9 @@ export default async function Hydation() {
 
     return (
         <Hydrate state={dehydratedState}>
-            <UserSelector />
+            <main className={S.MainContainer}>
+                <UserSelector/>
+            </main>
         </Hydrate>
     );
 }
