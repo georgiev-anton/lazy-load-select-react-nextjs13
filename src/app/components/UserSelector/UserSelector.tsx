@@ -6,11 +6,13 @@ import InfiniteLoader from "react-window-infinite-loader";
 import AutoSizer from "react-virtualized-auto-sizer";
 import {VariableSizeList as List} from "react-window";
 import {useGetUsersInfinite, User, USERS_BASE_LIMIT} from "@/api/users";
-import {UserItem} from "@/app/components/Item";
+import {UserItem} from "../UserItem";
 import {Loader} from "@/app/components/Loader";
+import {UserItemData} from "@/app/components/UserItemData";
 
 export const UserSelector = () => {
-    const [checkItem, setCheckItem] = useState<number | null>(null)
+    const [isListVisible, setIsListVisible] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null)
     const {
         data,
         isFetchingNextPage,
@@ -44,11 +46,25 @@ export const UserSelector = () => {
     }
 
     return (
-        <div className={S.Wrapper}>
+        <div>
             <p className={S.Title}>Users</p>
-            <div className={S.SelectContainer}/>
-            <ul className={S.SelectList}>
-                <InfiniteLoader
+            <div
+                tabIndex={0}
+                className={S.SelectContainer}
+                onClick={() => setIsListVisible(prev=>!prev)}
+                onBlur={() => setIsListVisible(false)}
+            >
+                {!!selectedUser && !!selectedUser &&
+                    <UserItemData
+                        user={selectedUser}
+                    />
+                }
+            </div>
+            <ul className={S.SelectList}
+                style={{ opacity: isListVisible ? 1 : 0 }}
+                onMouseDown={e => e.preventDefault()}
+            >
+                {isListVisible && <InfiniteLoader
                     itemCount={usersTotal}
                     isItemLoaded={isItemLoaded}
                     loadMoreItems={loadMoreItems as any}>
@@ -61,6 +77,7 @@ export const UserSelector = () => {
                                     onItemsRendered={onItemsRendered}
                                     height={height}
                                     itemCount={usersTotal}
+                                    width={width}
                                     itemSize={(index) => {
                                         const user = userList?.[index];
                                         if (user) {
@@ -71,7 +88,7 @@ export const UserSelector = () => {
                                         }
                                         return 32;
                                     }}
-                                    width={width}>
+                                >
                                     {({data, index, style}) => {
                                         const user = data?.[index];
                                         if (!user) {
@@ -81,15 +98,15 @@ export const UserSelector = () => {
                                             <UserItem
                                                 style={style}
                                                 user={user}
-                                                selectedUser={checkItem}
-                                                setSelectedUser={setCheckItem}/>
+                                                selectedUser={selectedUser}
+                                                setSelectedUser={setSelectedUser}/>
                                         );
                                     }}
                                 </List>
                             )}
                         </AutoSizer>
                     )}
-                </InfiniteLoader>
+                </InfiniteLoader>}
             </ul>
         </div>
     )

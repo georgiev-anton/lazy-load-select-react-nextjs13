@@ -5,14 +5,8 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   position: relative;
-}
-
-.Wrapper {
-  position: absolute;
-  top: 30%;
-  right: 50%
 }
 
 .Title {
@@ -26,6 +20,9 @@
   border-radius: 4px;
   outline: none;
   position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 
   background: $select-background;
   cursor: pointer;
@@ -33,7 +30,7 @@
 
   &::after {
     color: red;
-    content: url('/public/assets/icn_16_small_arrow_bottom.svg');
+    content: url('/assets/icn_16_small_arrow_bottom.svg');
     position: absolute;
     top: 9px;
     left: 335px;
@@ -50,33 +47,37 @@
   }
 }
 
+.SelectContainer:focus-within + .SelectList,
 .SelectContainer:focus + .SelectList {
    opacity: 1;
 }
 
 .SelectList {
-  opacity: 1;
+  opacity: 0;
   display: block;
   transition: opacity 0.35s;
   height: 160px;
-
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-
   background: $select-background;
-
   border-radius: 4px;
+  &:focus {
+    opacity: 1;
+  }
 }
 
-.ListItem {
+.ListItemData {
   height: 100%;
   padding: 0 12px;
   margin: 1px 0;
   display: flex;
   align-items: center;
-
   cursor: pointer;
+  user-select: none;
+}
+
+.ListItem {
   &:hover {
     background: rgba(228, 234, 255, 1);
   }
@@ -93,7 +94,6 @@
   height: 16px;
   margin: 0;
   color: white;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,8 +104,6 @@
 
 .ItemTitle {
   width: 309px;
-  //height: 19px;
   font-weight: 400 !important;
-
   margin: 0 0 0 10px;
 }
